@@ -7,7 +7,6 @@ export const Container = styled.div`
     height: 100%;
 
     padding: 4rem 2rem;
-    overflow-y: auto
 `
 export const Header = styled.div`
     width: 100%;
@@ -50,10 +49,9 @@ export const ContainerMovie = styled.div`
     width: 100%;
     height: auto;
 
-    padding: 2rem 0;
+    padding: 4rem 0;
     display: flex;
     justify-content: center;
-    align-items: start;
     flex-wrap: wrap;
 
     gap: 2.5rem;

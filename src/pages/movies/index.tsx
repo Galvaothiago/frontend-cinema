@@ -1,6 +1,7 @@
 import { MovieCard } from "../../components/movieCard";
 import { Container, ContainerMovie, Header } from "./style";
 import { IoMdAdd } from 'react-icons/io'
+import { Wrapper } from "../../globalStyle";
 
 export function Movies() {
     const images = [
@@ -13,20 +14,22 @@ export function Movies() {
     ]
 
     return (
-        <Container>
-            <Header>
-                <h3>Nossos filmes</h3>
-                <div>
+        <Wrapper>
+            <Container>
+                <Header>
+                    <h3>Nossos filmes</h3>
                     <div>
-                        <IoMdAdd />
+                        <div>
+                            <IoMdAdd />
+                        </div>
+                        <span>Total: {images.length}</span>
                     </div>
-                    <span>Total: {images.length}</span>
-                </div>
-            </Header>
-            <ContainerMovie>
-                { images.map(image => <MovieCard imgPath={`../src/assets/movies/${image}.jpg`}/>) }
-            </ContainerMovie>
-        </Container>
+                </Header>
+                <ContainerMovie>
+                    { images.map(image => <MovieCard imgPath={`../src/assets/movies/${image}.jpg`}/>) }
+                </ContainerMovie>
+            </Container>
+        </Wrapper>
     )
 }
 

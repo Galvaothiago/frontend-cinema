@@ -7,7 +7,7 @@ export const Container = styled.header`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: .2rem;
+    padding: .1rem;
 
     background-color: ${colors.blueDark};
 
@@ -42,5 +42,13 @@ export const Menu = styled.nav`
         &:hover {
             color: ${colors.grayMedium};
         }
+    }
+`
+
+export const Home = styled.div`
+    font-size: 1.6rem;
+    margin-right: 3rem;
+    svg {
+        color: ${colors.white || 'inherit'};
     }
 `
