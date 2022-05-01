@@ -1,6 +1,18 @@
+import { Route, Routes } from "react-router-dom"
+import { Header } from "./components/header"
+import { ContainerApp, Main } from "./globalStyle"
+import { Movies } from "./pages/movies"
+
 function App() {
   return (
-    <div>Hello world! I'm using vite + react to build this app</div>
+    <ContainerApp>
+      <Header />
+      <Main>
+      <Routes>
+        <Route path="/movies" element={<Movies />}/>
+      </Routes>
+      </Main>
+    </ContainerApp>
   )
 }
 

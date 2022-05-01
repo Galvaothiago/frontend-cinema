@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
     * {
@@ -33,5 +33,23 @@ export const colors = {
     greenDark: '#007200',
     yellowLight: '#ffee99',
     yellowMedium: '#ffe14c',
-    yellowDark: '#fdc500'
+    yellowDark: '#fdc500',
+    white: '#ffff',
 }
+
+export const ContainerApp = styled.div`
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+    background-color: ${colors.grayMedium};
+
+`
+
+export const Main = styled.main`
+    width: 100vw;
+    height: calc(100vh - 5rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
