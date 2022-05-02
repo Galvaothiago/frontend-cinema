@@ -23,8 +23,10 @@ export const colors = {
     grayMedium: '#ced4da',
     grayDark: '#495057',
     blueLight: '#00b4d8',
+    blueLightOpacity: 'rgba(0, 180, 216, .35)',
     blueMedium: '#0077b6',
     blueDark: '#03045e',
+    blueOpacity: 'rgba(247, 253, 255, .6)',    
     redLight: '#ff4d6d',
     redMedium: '#ef233c',
     redDark: '#d00000',
@@ -34,6 +36,9 @@ export const colors = {
     yellowLight: '#ffee99',
     yellowMedium: '#ffe14c',
     yellowDark: '#fdc500',
+    orangeMedium: '#f77f00',
+    black: '#212529',
+    blackOpacity: 'rgba(33, 37, 41, .75)',
     white: '#ffff',
 }
 

@@ -38,7 +38,7 @@ export function Home() {
             <Main bgColor={currentColor}>
                 <div>
                     < GiFilmProjector />
-                    <h4>Bem vindo(a), veja os lançamentos e escolha sua sessão hoje mesmo.</h4>
+                    <h4>Bem vindo(a), veja os filmes em lançamentos e escolha sua sessão hoje mesmo.</h4>
                 </div>
             </Main>
             <Footer>

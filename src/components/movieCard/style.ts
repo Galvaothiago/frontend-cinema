@@ -5,6 +5,7 @@ export const Container = styled.div`
     width: 16.85rem;
     height: 22rem;
 
+    border-radius: 32px 0 32px 0;
     background-color: ${colors.white};
     transition: all .3s;
     cursor: pointer;
@@ -12,6 +13,7 @@ export const Container = styled.div`
     img {
         width: 16.85rem;
         height: 22rem;
+        border-radius: 32px 0 32px 0;
     }
 
     &:hover {

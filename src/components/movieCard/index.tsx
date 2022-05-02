@@ -13,12 +13,13 @@ import { Container } from "./style";
 //     }
 // }
 interface test {
-    imgPath: string
+    imgPath: string,
+    onClick: React.MouseEventHandler<HTMLButtonElement | HTMLDivElement>
 }
 
-export function MovieCard({imgPath}: test) {
+export function MovieCard({imgPath, onClick}: test) {
     return (
-        <Container>
+        <Container onClick={onClick}>
             <img src={imgPath} alt={imgPath} />
         </Container>
     )

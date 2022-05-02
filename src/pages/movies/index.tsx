@@ -2,7 +2,8 @@ import { MovieCard } from "../../components/movieCard";
 import { Container, ContainerMovie, Header } from "./style";
 import { IoMdAdd } from 'react-icons/io'
 import { Wrapper } from "../../globalStyle";
-
+import { useContext } from "react";
+import { MovieContext } from '../../context/MovieContext'
 export function Movies() {
     const images = [
         'Aladdin',
@@ -12,6 +13,8 @@ export function Movies() {
         'Rocketman',
         'Vingadores: Ultimato'
     ]
+
+    const { openModal } = useContext(MovieContext)
 
     return (
         <Wrapper>
@@ -26,7 +29,12 @@ export function Movies() {
                     </div>
                 </Header>
                 <ContainerMovie>
-                    { images.map(image => <MovieCard imgPath={`../src/assets/movies/${image}.jpg`}/>) }
+                    { images.map((image, index) => 
+                        <MovieCard 
+                            key={`${index}-${image}`} 
+                            onClick={openModal} 
+                            imgPath={`../src/assets/movies/${image}.jpg`}/>
+                    )}
                 </ContainerMovie>
             </Container>
         </Wrapper>

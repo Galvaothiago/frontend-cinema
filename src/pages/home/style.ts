@@ -53,8 +53,9 @@ export const Main = styled.div<IconBgProp>`
         }
 
         h4 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 300;
+            text-transform: uppercase;
             color: ${({ bgColor }) => bgColor};
             line-height: 2rem;
             letter-spacing: 2px;
