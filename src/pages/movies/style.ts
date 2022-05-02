@@ -53,7 +53,5 @@ export const ContainerMovie = styled.div`
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-
     gap: 2.5rem;
-    
 `
