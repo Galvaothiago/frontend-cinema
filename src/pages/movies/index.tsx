@@ -1,9 +1,10 @@
 import { MovieCard } from "../../components/movieCard";
-import { Container, ContainerMovie, Header } from "./style";
+import { Container, ContainerMovie } from "./style";
 import { IoMdAdd } from 'react-icons/io'
 import { Wrapper } from "../../globalStyle";
 import { useContext } from "react";
 import { MovieContext } from '../../context/MovieContext'
+import { HeaderContent } from "../../components/headerContent";
 export function Movies() {
     const images = [
         'Aladdin',
@@ -19,15 +20,7 @@ export function Movies() {
     return (
         <Wrapper>
             <Container>
-                <Header>
-                    <h3>Nossos filmes</h3>
-                    <div>
-                        <div>
-                            <IoMdAdd />
-                        </div>
-                        <span>Total: {images.length}</span>
-                    </div>
-                </Header>
+                <HeaderContent title="Nossos filmes" showAddIcon={true} totalItems={images.length} />
                 <ContainerMovie>
                     { images.map((image, index) => 
                         <MovieCard 
