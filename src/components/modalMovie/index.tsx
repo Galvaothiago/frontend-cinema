@@ -50,7 +50,7 @@ export function ModalMovie() {
                 </CloseModal>
                 <Content>
                     <TitleMovie>Aladdin</TitleMovie>
-                    <InfoMovie>
+                    <InfoMovie bg="Aladdin">
                         <GradientBackground>
                             <ContainerInfo>
                                 <Classification>

@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { colors } from '../../globalStyle';
 
+interface BackgroundProp {
+    bg: string
+}
+
 export const Container = styled.div`
     width: 100vw;
     height: 100vh;
@@ -62,12 +66,12 @@ export const TitleMovie = styled.h3`
     background: linear-gradient(271deg, rgba(247,247,247,.07) 0%, rgba(24,24,24,.85) 51%);
 `
 
-export const InfoMovie = styled.div`
+export const InfoMovie = styled.div<BackgroundProp>`
     width: 100%;
     height: 90%;
     
     margin-top: 1rem;
-    background-image: url('../src/assets/movies/Aladdin.jpg');
+    background-image: ${({ bg }) => `url(../src/assets/movies/${bg}.jpg)`};
     background-position: 50% 20%;
 
     @media(max-width: 480px) {
