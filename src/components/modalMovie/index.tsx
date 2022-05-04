@@ -14,17 +14,19 @@ import {
     ContainerIdMovie
 } from "./style";
 
-import { RiCloseCircleFill } from 'react-icons/ri'
-import { MovieContext } from "../../context/MovieContext";
+import { RiCloseCircleFill, RiOpenSourceLine } from 'react-icons/ri'
+import { DataMovieProps, MovieContext } from "../../context/MovieContext";
 import { useContext, useState } from "react";
 import { AgeRating } from "../ageRating";
 import { CgTimer } from 'react-icons/cg'
 import { MdOutlineDateRange, MdContentCopy } from 'react-icons/md'
 import { FiMoreVertical } from 'react-icons/fi'
 
-export function ModalMovie() {
+
+export function ModalMovie({ ...props } ) {
+    const { id, classification, duration, genre, name, release, synopsis } = props.content
+
     const { closeModal } = useContext(MovieContext)
-    const ID_MOVIE = '6270488c10042bed4bca602b'
     const [ showIdMovie, setShowIdMovie ] = useState<boolean>(false)
     
     const handleShowIdMovie = () => {
@@ -42,6 +44,37 @@ export function ModalMovie() {
         handleShowIdMovie()
     }
 
+    const separateGenre = (genre: string) => {
+        const genres = genre?.split(',')
+
+        return genres
+    }
+
+    const createBackgroundName = (name: string) => {
+        const nameSeparateByColon = name.split(':')
+        const nameSeparateByHifen = name.split('-')
+
+        const hasColon = nameSeparateByColon.length > 1
+        const hasHifen = nameSeparateByHifen.length > 1
+        
+        if(hasColon) return nameSeparateByColon[0].trim()
+        if(hasHifen) return nameSeparateByHifen[0].trim()
+        
+        return name
+
+    }
+
+    const formatDate = (date: string) => {
+        const newDate = new Date(date)
+        
+        const day = newDate.getDate()
+        const mounth = newDate.getMonth() + 1 // sum  plus 1 because the mounth start from zero
+        const year = newDate.getFullYear()
+
+        return `${day}/${mounth}/${year}`
+    }
+
+    formatDate(release)
     return (
         <Container>
             <Modal>
@@ -49,34 +82,35 @@ export function ModalMovie() {
                     <RiCloseCircleFill onClick={closeModal}/>
                 </CloseModal>
                 <Content>
-                    <TitleMovie>Aladdin</TitleMovie>
-                    <InfoMovie bg="Aladdin">
+                    <TitleMovie>{name}</TitleMovie>
+                    <InfoMovie bg={createBackgroundName(name)}>
                         <GradientBackground>
                             <ContainerInfo>
                                 <Classification>
                                     <span>classificação:</span>
-                                    <AgeRating age={'16'} />
+                                    <AgeRating age={String(classification)} />
                                 </Classification>
                                 <Genre>
                                     <span>Gênero:</span>
                                     <div>
-                                        <span>Drama</span>
-                                        <span>Terror</span>
+                                        { separateGenre(genre).map((genre, i) => 
+                                            <span key={`${i}-${genre}`}>{genre}</span>
+                                        )}
                                     </div>
                                 </Genre>
                                 <OtherInfo>
                                     <div>
                                         <CgTimer/>
-                                        <span>{`${91}min`}</span>
+                                        <span>{`${duration}min`}</span>
                                     </div>
                                     <div>
                                         < MdOutlineDateRange />
-                                        <span>{'23/05/2019'}</span>
+                                        <span>{formatDate(release)}</span>
                                     </div>
                                 </OtherInfo>
                                 <Synopsis>
                                     <span>Sinopse:</span>
-                                    <p>{'Um jovem humilde descobre uma lâmpada mágica...'}</p>
+                                    <p>{synopsis}</p>
                                 </Synopsis>
                                 <ContainerIdMovie>
                                     <div onClick={handleShowIdMovie}>
@@ -85,8 +119,8 @@ export function ModalMovie() {
                                     </div>
                                     { showIdMovie && 
                                         <div>
-                                            <span>{ID_MOVIE}</span>
-                                            < MdContentCopy onClick={() => copyCodeToClipboard(ID_MOVIE)}/>
+                                            <span>{id}</span>
+                                            < MdContentCopy onClick={() => copyCodeToClipboard(id)}/>
                                         </div>}
                                 </ContainerIdMovie> 
                             </ContainerInfo>

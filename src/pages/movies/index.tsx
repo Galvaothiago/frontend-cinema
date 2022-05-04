@@ -1,10 +1,11 @@
-import { MovieCard } from "../../components/movieCard";
+import { MovieCard, test } from "../../components/movieCard";
 import { Container, ContainerMovie } from "./style";
 import { IoMdAdd } from 'react-icons/io'
 import { Wrapper } from "../../globalStyle";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { MovieContext } from '../../context/MovieContext'
 import { HeaderContent } from "../../components/headerContent";
+import { api } from "../../service/api";
 export function Movies() {
     const images = [
         'Aladdin',
@@ -15,18 +16,33 @@ export function Movies() {
         'Vingadores: Ultimato'
     ]
 
-    const { openModal } = useContext(MovieContext)
+    const [ dataMovie, setDataMovie ] = useState<test[]>()
+    // const empty = dataMovie.length === 0
+
+    const getDateMovie =  async () => {
+        const dataMovie = await api.get('/movies')
+
+        setDataMovie(dataMovie?.data)
+    }
+
+    useEffect(() => {
+        getDateMovie()
+    }, [])
+
+    const { handleDataModal } = useContext(MovieContext)
 
     return (
         <Wrapper>
             <Container>
                 <HeaderContent title="Nossos filmes" showAddIcon={true} totalItems={images.length} />
                 <ContainerMovie>
-                    { images.map((image, index) => 
+                    { dataMovie?.map(item => 
                         <MovieCard 
-                            key={`${index}-${image}`} 
-                            onClick={openModal} 
-                            imgPath={`../src/assets/movies/${image}.jpg`}/>
+                            {...item}
+                            imgPath={`../src/assets/movies/${item.name}.jpg`}
+                            key={item?.id}
+                            onClick={() => handleDataModal(item)} 
+                            />
                     )}
                 </ContainerMovie>
             </Container>

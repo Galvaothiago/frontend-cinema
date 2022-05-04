@@ -38,7 +38,7 @@ export const colors = {
     yellowDark: '#fdc500',
     orangeMedium: '#f77f00',
     black: '#212529',
-    blackOpacity: 'rgba(33, 37, 41, .75)',
+    blackOpacity: 'rgba(33, 37, 41, .85)',
     white: '#ffff',
 }
 
@@ -67,3 +67,4 @@ export const Wrapper = styled.div`
 
     overflow-y: auto;
 `
+

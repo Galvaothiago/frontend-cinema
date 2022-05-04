@@ -73,6 +73,7 @@ export const InfoMovie = styled.div<BackgroundProp>`
     margin-top: 1rem;
     background-image: ${({ bg }) => `url(../src/assets/movies/${bg}.jpg)`};
     background-position: 50% 20%;
+    background-size: 100%;
 
     @media(max-width: 480px) {
         background-position: center;

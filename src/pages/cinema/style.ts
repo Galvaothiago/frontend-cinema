@@ -7,3 +7,16 @@ export const Container = styled.div`
 
     padding: 4rem 2rem;
 `
+
+export const ContainerCinema = styled.div`
+    width: 100%;
+    height: auto;
+
+    padding: 4rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    /* flex-wrap: wrap; */
+    gap: 2.5rem;
+`
