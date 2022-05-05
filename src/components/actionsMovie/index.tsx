@@ -10,7 +10,6 @@ import { Link } from "react-router-dom";
 
 export function ActionsMovie() {
     const [ showButtons, setShowButtons ] = useState<boolean>(false)
-    const [ showDeleteMovie, setShowDeleteMovie ] = useState<boolean>(false)
 
     const [ name, setName ] = useState<string>('')
     const [ genre, setGenre ] = useState<string>('')
@@ -23,9 +22,13 @@ export function ActionsMovie() {
     const handleDeleteMovie = async () => {
         const inputDelete = prompt("digite aqui o ID do filme que deseja excluir da base...")
         setShowButtons(false)
-        const infoMovie = await api.delete(`/movies/${inputDelete}`)
+        try {
+            const infoMovie = await api.delete(`/movies/${inputDelete}`)
+            if(infoMovie.status == 204) alert("Filme deletado com sucesso!")
 
-        if(infoMovie.status == 204) alert("Filme deletado com sucesso!")
+        } catch(err) {
+            if(err.request.status == 404) alert("Filme não localizado na nossa base!")
+        }
     }
 
     const cleanAllInputs = () => {

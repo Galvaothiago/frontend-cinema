@@ -77,45 +77,6 @@ export const ContainerButton = styled.div`
         cursor: pointer;
 
     }
-
-    /* div:nth-child(1) {
-        width: auto;
-        position: relative;
-        transition: all .3s;   
-
-
-
-        svg {
-            position: absolute;
-            left: 1rem;
-            top: .6rem;
-
-            color: ${colors.white};
-            font-size: 1.2rem;
-          
-        }
-
-    }
-
-    div:nth-child(2) {
-        width: auto;
-        position: relative;
-
-        button {
-
-        }
-
-        svg {
-            position: absolute;
-            left: .5rem;
-            top: .6rem;
-
-            color: ${colors.white};
-            font-size: 1.2rem;
-        }
-    } */
-
-
 `
 
 export const Content = styled.div`
