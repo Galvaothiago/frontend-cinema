@@ -24,11 +24,11 @@ import { FiMoreVertical } from 'react-icons/fi'
 
 
 export function ModalMovie({ ...props } ) {
-    const { id, classification, duration, genre, name, release, synopsis } = props.content
+    const { id, classification, duration, genre, name, release, synopsis, pathImg } = props.content
 
     const { closeModal } = useContext(MovieContext)
     const [ showIdMovie, setShowIdMovie ] = useState<boolean>(false)
-    
+
     const handleShowIdMovie = () => {
         setShowIdMovie(oldState => !oldState)
     }
@@ -50,19 +50,19 @@ export function ModalMovie({ ...props } ) {
         return genres
     }
 
-    const createBackgroundName = (name: string) => {
-        const nameSeparateByColon = name.split(':')
-        const nameSeparateByHifen = name.split('-')
+    // const createBackgroundName = (name: string) => {
+    //     const nameSeparateByColon = name.split('_')
+    //     const nameSeparateByHifen = name.split('-')
 
-        const hasColon = nameSeparateByColon.length > 1
-        const hasHifen = nameSeparateByHifen.length > 1
+    //     const hasColon = nameSeparateByColon.length > 1
+    //     const hasHifen = nameSeparateByHifen.length > 1
         
-        if(hasColon) return nameSeparateByColon[0].trim()
-        if(hasHifen) return nameSeparateByHifen[0].trim()
+    //     if(hasColon) return nameSeparateByColon[0].trim()
+    //     if(hasHifen) return nameSeparateByHifen[0].trim()
         
-        return name
+    //     return name
 
-    }
+    // }
 
     const formatDate = (date: string) => {
         const newDate = new Date(date)
@@ -74,7 +74,6 @@ export function ModalMovie({ ...props } ) {
         return `${day}/${mounth}/${year}`
     }
 
-    formatDate(release)
     return (
         <Container>
             <Modal>
@@ -83,7 +82,7 @@ export function ModalMovie({ ...props } ) {
                 </CloseModal>
                 <Content>
                     <TitleMovie>{name}</TitleMovie>
-                    <InfoMovie bg={createBackgroundName(name)}>
+                    <InfoMovie bg={pathImg}>
                         <GradientBackground>
                             <ContainerInfo>
                                 <Classification>

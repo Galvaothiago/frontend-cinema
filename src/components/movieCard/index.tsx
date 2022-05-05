@@ -1,3 +1,4 @@
+
 import { Container } from "./style";
 
 export interface MovieCardProps  {
@@ -9,6 +10,7 @@ export interface MovieCardProps  {
     duration: number,
     classification: number,       
     release: string,
+    pathImg: string,
     synopsis: string
     
 }

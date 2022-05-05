@@ -1,13 +1,12 @@
 import { ContainerButton, Content, Form, Header, Icon } from "./style";
 import { Container } from "./style";
 import { FiMoreVertical } from 'react-icons/fi'
-import { IoTrashBinOutline } from 'react-icons/io5'
-import { AiTwotoneEdit } from 'react-icons/ai'
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import { Wrapper } from "../../globalStyle";
 import { GiFilmProjector } from 'react-icons/gi'
+import { BiArrowBack } from 'react-icons/bi'
 import { api } from "../../service/api";
-
+import { Link } from "react-router-dom";
 
 export function ActionsMovie() {
     const [ showButtons, setShowButtons ] = useState<boolean>(false)
@@ -17,7 +16,20 @@ export function ActionsMovie() {
     const [ duration, setDuration ] = useState<number>()
     const [ classification, setClassification ] = useState<string>('')
     const [ release, setRelease ] = useState<string>('')
+    const [ pathImg, setPathImg ] = useState<string>('')
     const [ synopsis, setSynopsis ] = useState<string>('')
+
+    const handleDeleteMovie = async () => {
+        const inputDelete = prompt("digite aqui o ID do filme que deseja excluir da base...")
+        setShowButtons(false)
+        try {
+            const infoMovie = await api.delete(`/movies/${inputDelete}`)
+            if(infoMovie.status == 204) alert("Filme deletado com sucesso!")
+
+        } catch(err: any) {
+            if(err.request.status == 404) alert("Filme não localizado na nossa base!")
+        }
+    }
 
     const cleanAllInputs = () => {
         setName('')
@@ -25,39 +37,38 @@ export function ActionsMovie() {
         setDuration(0)
         setClassification('')
         setRelease('')
+        setPathImg('')
         setSynopsis('')
     }
 
     const handleInfoCreateMovie = async (e: FormEvent) => {
         e.preventDefault()
-        const date = new Date(release)
 
-        const data = {}
-
-        
-            const info =  await api.post('/movies', {
+        try {
+            const date = new Date(release)
+            const dataMovie = {
                 name,
                 genre,
                 duration,
                 classification,
                 release: date,
+                pathImg,
                 synopsis
-            })
-            if(info.status == 201) {
-                alert("Novo filme inserido com sucesso!")
             }
 
-            console.log(info)
+            const info =  await api.post('/movies', dataMovie)
 
-            cleanAllInputs()
+            if(info.status == 201) alert("Novo filme inserido com sucesso!")
+            if(info.data.status == 409) alert("Já existem um filme cadastrado com este nome")
         
-            // console.log(err)
-        
             cleanAllInputs()
-    
+
+        } catch(err) {
+            console.log(err)
+        }
     }
+
     const handleShowButtons = () => {
-        
         setShowButtons(oldState => !oldState)
     }
 
@@ -65,26 +76,21 @@ export function ActionsMovie() {
         <Wrapper>
             <Container>
                 <Header>
-                    <p>Adicione um novo filme</p>
+                    <div>
+                        <Link to="/movies">
+                            <BiArrowBack/>
+                        </Link>
+                        <p>Adicione um novo filme</p>
+                    </div>
                     <FiMoreVertical onClick={handleShowButtons} />
                     <ContainerButton>
                     { showButtons && 
-                        <>
-                            <div>
-                                <AiTwotoneEdit />
-                                <button type="button">Editar</button>
-                            </div>
-
-                            <div>
-                                < IoTrashBinOutline />
-                                <button type="button">Deletar</button>
-                            </div> 
-                        </>
+                       <button onClick={handleDeleteMovie} type="button">Deletar</button>
                     }
                     </ContainerButton>
                 </Header>
                 <Content>
-                    <Form onSubmit={e => handleInfoCreateMovie(e)}>
+                    {<Form onSubmit={e => handleInfoCreateMovie(e)}>
                             <div>
                                 <label>Titulo:</label>
                                 <input value={name} required type="text" 
@@ -94,6 +100,11 @@ export function ActionsMovie() {
                                 <label>Gênero:</label>
                                 <input value={genre} required type="text" 
                                     name="genre"id="genre" onChange={(e) => setGenre(e.target.value)}/>
+                            </div>
+                            <div>
+                                <label>Link da imagem:</label>
+                                <input value={pathImg} required type="text" 
+                                    name="genre"id="genre" onChange={(e) => setPathImg(e.target.value)}/>
                             </div>
                             <div>
                                 <div>
@@ -127,7 +138,7 @@ export function ActionsMovie() {
                             <div>
                                 <button type="submit">Salvar</button>
                             </div>
-                    </Form>
+                    </Form>}
                     <Icon>
                     < GiFilmProjector />
                     </Icon>

@@ -6,6 +6,9 @@ import { Cinema } from "./pages/cinema"
 import { Home } from "./pages/home"
 import { Movies } from "./pages/movies"
 import { ActionsMovie } from './components/actionsMovie'
+import { useContext } from "react"
+import { MovieContext } from "./context/MovieContext"
+
 
 function App() {
   return (
@@ -14,7 +17,8 @@ function App() {
       <Main>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/movies" element={false ? <Movies /> : <ActionsMovie />}/>
+        <Route path="/movies" element={<Movies />}/>
+        <Route path="/movies/create" element={<ActionsMovie />}/>
         <Route path="/cinemas" element={<Cinema />}/>
       </Routes>
       </Main>
