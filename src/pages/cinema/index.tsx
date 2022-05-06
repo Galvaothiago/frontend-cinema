@@ -29,7 +29,9 @@ export function Cinema() {
                                                         key={content.id} 
                                                         name={content.name} 
                                                         state={content.state} 
-                                                        city={content.city}/>) }
+                                                        city={content.city}
+                                                        id={content.id} />)
+                                                        }
                 </ContainerCinema>
             </Container>
         </Wrapper>
